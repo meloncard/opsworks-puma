@@ -8,6 +8,8 @@ include_recipe "nginx"
 
 
 node[:deploy].each do |application, deploy|
+  Chef::Log.warn("Application: #{application}, Deploy: #{deploy.inspect}")
+  
   puma_config application do
     directory deploy[:deploy_to]
     environment deploy[:rails_env]

@@ -1,3 +1,5 @@
+require 'json'
+
 ruby_block "ensure only our puma version is installed by deinstalling any other version" do
   block do
     ensure_only_gem_version('puma', node[:puma][:version])
@@ -6,10 +8,13 @@ end
 
 include_recipe "nginx"
 
+Chef::Log.warn("Deploy JSON: #{node[:deploy].to_json}")
 
 node[:deploy].each do |application, deploy|
-  Chef::Log.warn("Application: #{application}, Deploy: #{deploy.inspect}")
-  
+  next unless deploy[:puma]
+
+  Chef::Log.warn("Application: #{application}, Deploy: #{deploy.to_json}")
+
   puma_config application do
     directory deploy[:deploy_to]
     environment deploy[:rails_env]

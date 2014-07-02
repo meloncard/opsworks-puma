@@ -1,18 +1,22 @@
 define :puma_web_app do
+
   deploy = params[:deploy]
   application = params[:application]
 
+  # Ensure directory exists
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
     path deploy[:deploy_to]
   end
 
+  # Run standard deployment script
   opsworks_deploy do
     app application
     deploy_data deploy
   end
   
+  # Enable Nginx web application
   nginx_web_app deploy[:application] do
     docroot deploy[:absolute_document_root]
     server_name deploy[:domains].first
@@ -28,4 +32,5 @@ define :puma_web_app do
     template "nginx_puma_web_app.erb"
     application deploy
   end
+
 end

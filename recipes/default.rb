@@ -17,6 +17,12 @@ node[:deploy].each do |application, deploy|
 
   Chef::Log.warn("Application: #{application}, Deploy: #{deploy.to_json}")
 
+  # Ensure we have user configured correctly
+  opsworks_deploy_user do
+    deploy_data deploy
+  end
+
+  # Configure puma
   puma_config application do
     directory deploy[:deploy_to]
     environment deploy[:rails_env]

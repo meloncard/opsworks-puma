@@ -10,12 +10,6 @@ define :puma_web_app do
     path deploy[:deploy_to]
   end
 
-  # Run standard deployment script
-  opsworks_deploy do
-    app application
-    deploy_data deploy
-  end
-  
   # Enable Nginx web application
   nginx_web_app deploy[:application] do
     docroot deploy[:absolute_document_root]

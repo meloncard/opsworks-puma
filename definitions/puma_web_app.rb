@@ -2,6 +2,17 @@ define :puma_web_app do
   deploy = params[:deploy]
   application = params[:application]
 
+  opsworks_deploy_dir do
+    user deploy[:user]
+    group deploy[:group]
+    path deploy[:deploy_to]
+  end
+
+  opsworks_deploy do
+    app application
+    deploy_data deploy
+  end
+  
   nginx_web_app deploy[:application] do
     docroot deploy[:absolute_document_root]
     server_name deploy[:domains].first

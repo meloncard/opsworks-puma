@@ -11,7 +11,9 @@ include_recipe "nginx"
 Chef::Log.warn("Deploy JSON: #{node[:deploy].to_json}")
 
 node[:deploy].each do |application, deploy|
-  next unless deploy[:puma]
+  
+  next unless deploy[:puma] # only run puma apps
+  next unless deploy[:layers].nil? || ( deploy[:layers] & node[:opsworks][:layers] ).count > 0 # allow layer-by-layer restrictions (custom json can include a "layers" key indicting which layers should deploy this app)
 
   Chef::Log.warn("Application: #{application}, Deploy: #{deploy.to_json}")
 

@@ -27,7 +27,7 @@ setgid <%= @group %>
 respawn
 respawn limit 3 30
 
-instance <% @name %>
+instance <%= @name %>
 
 script
 # this script runs in /bin/sh by default

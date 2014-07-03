@@ -12,10 +12,10 @@
 #   sudo status <%= @name%>
 #
 # or use the service command:
-#   sudo service puma {start,stop,restart,status}
+#   sudo service <%= @name%> {start,stop,restart,status}
 #
 
-description "<%= @name%> Puma Background Worker"
+description "Puma Background Worker for <%= @name%> Application"
 
 # No start-on
 stop on runlevel [06]
@@ -28,6 +28,10 @@ respawn
 respawn limit 3 30
 
 instance <%= @name %>
+
+<% if @daemonize %>
+expect daemon
+<% end %>
 
 script
 # this script runs in /bin/sh by default

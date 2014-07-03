@@ -66,8 +66,8 @@ define :puma_config, default_parameters do
   # Create app working directory with owner/group if specified
   directory params[:puma_directory] do
     recursive true
-    owner params[:owner] if params[:owner]
-    group params[:group] if params[:group]
+    owner params[:owner]
+    group params[:group]
   end
 
   # puma.rb.erb -> {app}.config
@@ -76,8 +76,8 @@ define :puma_config, default_parameters do
     path params[:config_path]
     cookbook params[:config_cookbook]
     mode "0644"
-    owner params[:owner] if params[:owner]
-    group params[:group] if params[:group]
+    owner params[:owner]
+    group params[:group]
     variables params
   end
 
@@ -87,8 +87,8 @@ define :puma_config, default_parameters do
     path "/etc/init/#{params[:name]}.conf"
     cookbook "opsworks-puma"
     mode "0755"
-    owner params[:owner] if params[:owner]
-    group params[:group] if params[:group]
+    owner params[:owner]
+    group params[:group]
     variables params
   end
 

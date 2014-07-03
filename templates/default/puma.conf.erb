@@ -21,8 +21,8 @@ description "<%= @name%> Puma Background Worker"
 stop on runlevel [06]
 
 # change apps to match your deployment user if you want to use this as a less privileged user (recommended!)
-setuid <%= @params[:owner] %>
-setgid <%= @params[:owner] %>
+setuid <%= @owner %>
+setgid <%= @group %>
 
 respawn
 respawn limit 3 30

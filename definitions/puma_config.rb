@@ -92,16 +92,4 @@ define :puma_config, default_parameters do
     variables params
   end
 
-  # We are not currently including logrotate?
-  if params[:logrotate]
-    logrotate_app params[:name] do
-      cookbook "logrotate"
-      path [ params[:stdout_redirect], params[:stderr_redirect] ]
-      frequency "daily"
-      rotate 30
-      size "5M"
-      options ["missingok", "compress", "delaycompress", "notifempty", "dateext"]
-      variables params
-    end
-  end
 end

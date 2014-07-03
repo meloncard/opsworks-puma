@@ -70,7 +70,7 @@ define :puma_config, default_parameters do
     group params[:group] if params[:group]
   end
 
-  # puma.rb
+  # puma.rb.erb -> {app}.config
   template params[:name] do
     source params[:config_source]
     path params[:config_path]

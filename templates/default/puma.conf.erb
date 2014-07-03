@@ -6,16 +6,16 @@
 #
 # See workers.conf for how to manage all Puma instances at once.
 #
-# Save this config as /etc/init/puma.conf then manage puma with:
-#   sudo start <%= @name%>
-#   sudo stop <%= @name%>
-#   sudo status <%= @name%>
+# Save this config as /etc/init/<%= @name %>.conf then manage puma with:
+#   sudo start <%= @name %>
+#   sudo stop <%= @name %>
+#   sudo status <%= @name %>
 #
 # or use the service command:
-#   sudo service <%= @name%> {start,stop,restart,status}
+#   sudo service <%= @name %> {start,stop,restart,status}
 #
 
-description "Puma Background Worker for <%= @name%> Application"
+description "Puma Background Worker for <%= @name %> Application"
 
 # No start-on
 stop on runlevel [06]
@@ -32,6 +32,9 @@ instance <%= @name %>
 <% if @daemonize %>
 expect daemon
 <% end %>
+
+# reload via USR2 signal
+reload signal SIGUSR2
 
 script
 # this script runs in /bin/sh by default

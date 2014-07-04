@@ -10,9 +10,10 @@
 #   sudo start <%= @name %>
 #   sudo stop <%= @name %>
 #   sudo status <%= @name %>
+#   sudo reload <%= @name %>
 #
 # or use the service command:
-#   sudo service <%= @name %> {start,stop,restart,status}
+#   sudo service <%= @name %> {start,stop,restart,reload,status}
 #
 
 description "Puma Background Worker for <%= @name %> Application"
@@ -26,8 +27,6 @@ setgid <%= @group %>
 
 respawn
 respawn limit 3 30
-
-instance <%= @name %>
 
 <% if @daemonize %>
 expect daemon

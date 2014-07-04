@@ -6,7 +6,7 @@ default_parameters = {
   working_dir: nil,
   rackup: nil,
   environment: "production",
-  daemonize: true,
+  daemonize: false,
   pidfile: nil,
   config_path: nil,
   state_path: nil,

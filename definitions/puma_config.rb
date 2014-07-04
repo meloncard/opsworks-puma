@@ -92,4 +92,10 @@ define :puma_config, default_parameters do
     variables params
   end
 
+  # ability to run initctl for script
+  sudo "initctl #{params[:name]}" do
+    user params[:owner]
+    nopasswd true
+    commands  %w{start stop reload restart}.map { |cmd| "/sbin/#{cmd} #{params[:name]}"}
+  end
 end

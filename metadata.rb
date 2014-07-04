@@ -6,5 +6,6 @@ version     "0.0.1"
 
 depends "nginx"
 depends "deploy"
+depends "sudo"
 
 recipe "opsworks-puma", "Setup puma to run for all of a stacks rails applications"
